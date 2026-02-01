@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine?</title>
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6eb;
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      width: 400px;
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      color: #e6005c;
+    }
+
+    .play-area {
+      position: relative;
+      height: 180px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #yes {
+      background-color: #ff4d79;
+      color: white;
+      margin-right: 10px;
+    }
+
+    #no {
+      background-color: #999;
+      color: white;
+      position: absolute;
+      left: 140px;
+      top: 80px;
+      max-width: 230px;
+      white-space: nowrap;
+    }
+
+    #celebrate {
+      display: none;
+      margin-top: 25px;
+    }
+
+    #celebrate img {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>Will you be my Valentine? ❤️</h1>
+
+    <div class="play-area" id="playArea">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+
+    <div id="celebrate">
+      <h2>Yay! 🎉💖</h2>
+      <img
+        src="hug.gif"
+        alt="Celebration">
+    </div>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const celebrateDiv = document.getElementById("celebrate");
+    const playArea = document.getElementById("playArea");
+
+    const noTexts = [
+      "Wait… are you sure?",
+      "Really? 🤨",
+      "Try again!",
+      "You sure?? 😏",
+      "Haha nice try 😂",
+      "No escape in love 💘",
+      "Yes, in love with you ❤️",
+      "No escape 😈"
+    ];
+
+    let clickCount = 0;
+
+    function moveNoButton() {
+      const maxX = playArea.clientWidth - noButton.offsetWidth;
+      const maxY = playArea.clientHeight - noButton.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+
+    noButton.addEventListener("click", () => {
+      if (clickCount < noTexts.length) {
+        noButton.textContent = noTexts[clickCount];
+      } else {
+        noButton.textContent = "No escape 😈";
+      }
+      clickCount++;
+      moveNoButton();
+    });
+
+    noButton.addEventListener("mouseover", moveNoButton);
+
+    yesButton.addEventListener("click", () => {
+      celebrateDiv.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
